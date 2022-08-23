@@ -36,27 +36,10 @@ We select there kinds of loss in this project and different loss will lead to hi
 - MSE loss
 - Pearson correlation loss 
 ### 5.Model stacking:
-This is our key method for the best solution. Inspired by 'quantitive change lead to qualitive change' we use lightgbm for stacking model results. 
+This is our key method for the best solution. Inspired by 'quantitive change lead to qualitive change' we use **lightgbm** for stacking model results. 
 We use each model's prediction as the feature and the true target as the label to train a 1-layer stacking model.
 
 This solution makes us create the **top4% best performace within global 1889 solutions**.
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 # Dataset description
 
