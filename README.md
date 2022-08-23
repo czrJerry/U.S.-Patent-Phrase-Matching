@@ -1,11 +1,47 @@
 # Project Background
 
-The U.S. Patent and Trademark Office (USPTO) offers one of the largest repositories of scientific, technical, and commercial information in the world through its Open Data Portal. Patents are a form of intellectual property granted in exchange for the public disclosure of new and useful inventions. Because patents undergo an intensive vetting process prior to grant, and because the history of U.S. innovation spans over two centuries and 11 million patents, the U.S. patent archives stand as a rare combination of data volume, quality, and diversity.
-
-Determining the semantic similarity between phrases is critically important during the patent search and examination process to determine if an invention has been described before. For example, if one invention claims "television set" and a prior publication describes "TV set", a model would ideally recognize these are the same and assist a patent attorney or examiner in retrieving relevant documents. This extends beyond paraphrase identification; if one invention claims a "strong material" and another uses "steel", that may also be a match. What counts as a "strong material" varies per domain (it may be steel in one domain and ripstop fabric in another, but you wouldn't want your parachute made of steel).
+The U.S. Patent and Trademark Office (USPTO) offers one of the largest repositories of scientific, technical, and commercial information in the world through its Open Data Portal. Determining the semantic similarity between phrases is critically important during the patent search and examination process to determine if an invention has been described before. For example, if one invention claims "television set" and a prior publication describes "TV set", a model would ideally recognize these are the same and assist a patent attorney or examiner in retrieving relevant documents. This extends beyond paraphrase identification; if one invention claims a "strong material" and another uses "steel", that may also be a match. What counts as a "strong material" varies per domain (it may be steel in one domain and ripstop fabric in another, but you wouldn't want your parachute made of steel).
 
 # Project task
 Build a model to match phrases in order to extract contextual information, thereby helping the patent community connect the dots between millions of patent documents.
+
+# Mode and Strategy
+Our model is compatible with the HuggingFace framework so you can change the model to any BERT based model you want.
+
+The following shows the unique method we use generating the best solution.
+
+### 1.Data pre-processing:
+We delete the stop words and puctuation 
+### 2.Data-augmentation:
+
+
+
+### 3.Model selection
+
+
+
+### 4.Doble loss:
+
+
+### 5.Model stacking:
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 # Dataset description
 
