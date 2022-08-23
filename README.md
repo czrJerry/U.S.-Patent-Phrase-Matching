@@ -29,15 +29,17 @@ We select the most state-of-the art model on Hugging face inluding :
 
 - Google/electra-large
 
-
-
-
-
 ### 4.Doble loss:
+We select there kinds of loss in this project and different loss will lead to high diversity when ensembling. Besides, combine two or three loss together could make the training process more stable.
 
-
+- BCE loss
+- MSE loss
+- Pearson correlation loss 
 ### 5.Model stacking:
+This is our key method for the best solution. Inspired by 'quantitive change lead to qualitive change' we use lightgbm for stacking model results. 
+We use each model's prediction as the feature and the true target as the label to train a 1-layer stacking model.
 
+This solution makes us create the **top4% best performace within global 1889 solutions**.
 
 
 
