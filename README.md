@@ -41,6 +41,9 @@ We use each model's prediction as the feature and the true target as the label t
 
 This solution makes us create the **top4% best performace within global 1889 solutions**.
 
+# Result
+After model stacking, our model get a 0.8636 pearson score while the best solution is 0.8782. The gap is only **1%**!
+
 # Dataset description
 
 The dataset contains pairs of phrases (an anchor and a target phrase) and asked to rate how similar they are on a scale from 0 (not at all similar) to 1 (identical in meaning). This challenge differs from a standard semantic similarity task in that similarity has been scored here within a patent's context, specifically its CPC classification (version 2021.05), which indicates the subject to which the patent relates. For example, while the phrases "bird" and "Cape Cod" may have low semantic similarity in normal language, the likeness of their meaning is much closer if considered in the context of "house".
