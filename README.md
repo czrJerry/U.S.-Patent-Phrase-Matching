@@ -11,12 +11,25 @@ Our model is compatible with the HuggingFace framework so you can change the mod
 The following shows the unique method we use generating the best solution.
 
 ### 1.Data pre-processing:
-We delete the stop words and puctuation 
+We delete the formula like chemical formula in the dataset and change in to human languages.
 ### 2.Data-augmentation:
-
-
-
+We add more context text to our train set to help our model better understand the mean of patent phrases under a specific context
 ### 3.Model selection
+We select the most state-of-the art model on Hugging face inluding :
+
+- Microsoft/debert-v3-large
+
+- anferico-bert-for-patent-large
+
+- Microsoft/devert-v3-small
+
+- Microsoft/cocolm-v3-large
+
+- Microsoft/debert-v2-xlarge
+
+- Google/electra-large
+
+
 
 
 
