@@ -1,27 +1,27 @@
 # Project Background
 
-The U.S. Patent and Trademark Office (USPTO) offers one of the largest repositories of scientific, technical, and commercial information in the world through its Open Data Portal. Determining the semantic similarity between phrases is critically important during the patent search and examination process to determine if an invention has been described before. For example, if one invention claims "television set" and a prior publication describes "TV set", a model would ideally recognize these are the same and assist a patent attorney or examiner in retrieving relevant documents. This extends beyond paraphrase identification; if one invention claims a "strong material" and another uses "steel", that may also be a match. What counts as a "strong material" varies per domain (it may be steel in one domain and ripstop fabric in another, but you wouldn't want your parachute made of steel).
+The U.S. Patent and Trademark Office (USPTO) offers one of the largest repositories of scientific, technical, and commercial information in the world through its Open Data Portal. Determining the semantic similarity between phrases is critically important during the patent search and examination process to determine if an invention has been described before. For example, if one invention claims "television set" and a prior publication describes "T.V. set", a model would ideally recognize these are the same and assist a patent attorney or examiner in retrieving relevant documents. This extends beyond paraphrase identification; if one invention claims a "strong material" and another uses "steel", that may also be a match. What counts as a "strong material" varies per domain (it may be steel in one domain and ripstop fabric in another, but you wouldn't want your parachute made of steel).
 
 # Project task
 Build a model to match phrases in order to extract contextual information, thereby helping the patent community connect the dots between millions of patent documents.
 
 # Mode and Strategy
-Our model is compatible with the HuggingFace framework so you can change the model to any BERT based model you want.
+Our model is compatible with the HuggingFace framework, so you can change the model to any BERT-based model you want.
 
-The following shows the unique method we use generating the best solution.
+The following shows the unique method we use to generate the best solution.
 
 ### 1.Data pre-processing:
-We delete the formula like chemical formula in the dataset and change in to human languages.
+We delete the formula like the chemical formula in the dataset and change it to human languages.
 ### 2.Data-augmentation:
 We add more context text to our train set to help our model better understand the mean of patent phrases under a specific context
 ### 3.Model selection
-We select the most state-of-the art model on Hugging face inluding :
+We select the most state-of-the-art model on Hugging face, including :
 
 - Microsoft/debert-v3-large
 
 - anferico-bert-for-patent-large
 
-- Microsoft/devert-v3-small
+- Microsoft/debert-v3-small
 
 - Microsoft/cocolm-v3-large
 
@@ -30,35 +30,35 @@ We select the most state-of-the art model on Hugging face inluding :
 - Google/electra-large
 
 ### 4.Doble loss:
-We select there kinds of loss in this project and different loss will lead to high diversity when ensembling. Besides, combine two or three loss together could make the training process more stable.
+We select three kinds of loss in this project, and different kinds of loss will lead to high diversity when ensembling. Besides, combining two or three losses together could make the training process more stable.
 
 - BCE loss
 - MSE loss
 - Pearson correlation loss 
 ### 5.Model stacking:
-This is our key method for the best solution. Inspired by 'quantitive change lead to qualitive change' we use **lightgbm** for stacking model results. 
+This is our key method for the best solution. Inspired by 'quantitive change lead to qualitative change', we use **lightgbm** for stacking model results. 
 We use each model's prediction as the feature and the true target as the label to train a 1-layer stacking model.
 
-This solution makes us create the **top4% best performace within global 1889 solutions**.
+This solution makes us create the **top4% best performance within global 1889 solutions**.
 
 # Result
-After model stacking, our model get a 0.8636 pearson score while the best solution is 0.8782. The gap is only **1%**!
+After model stacking, our model gets a 0.8636 Pearson score, while the best solution is 0.8782. The gap is only **1%**!
 
 # Dataset description
 
-The dataset contains pairs of phrases (an anchor and a target phrase) and asked to rate how similar they are on a scale from 0 (not at all similar) to 1 (identical in meaning). This challenge differs from a standard semantic similarity task in that similarity has been scored here within a patent's context, specifically its CPC classification (version 2021.05), which indicates the subject to which the patent relates. For example, while the phrases "bird" and "Cape Cod" may have low semantic similarity in normal language, the likeness of their meaning is much closer if considered in the context of "house".
+The dataset contains pairs of phrases (an anchor and a target phrase) and is asked to rate how similar they are on a scale from 0 (not at all similar) to 1 (identical in meaning). This challenge differs from a standard semantic similarity task in that similarity has been scored here within a patent's context, specifically its CPC classification (version 2021.05), which indicates the subject to which the patent relates. For example, while the phrases "bird" and "Cape Cod" may have low semantic similarity in normal language, the likeness of their meaning is much closer if considered in the context of "house".
 
 The scores are in the 0-1 range with increments of 0.25 with the following meanings:
 
-1.0 - Very close match. This is typically an exact match except possibly for differences in conjugation, quantity (e.g. singular vs. plural), and addition or removal of stopwords (e.g. “the”, “and”, “or”).
-0.75 - Close synonym, e.g. “mobile phone” vs. “cellphone”. This also includes abbreviations, e.g. "TCP" -> "transmission control protocol".
-0.5 - Synonyms which don’t have the same meaning (same function, same properties). This includes broad-narrow (hyponym) and narrow-broad (hypernym) matches.
-0.25 - Somewhat related, e.g. the two phrases are in the same high level domain but are not synonyms. This also includes antonyms.
+1.0 - Very close match. This is typically an exact match except possibly for differences in conjugation, quantity (e.g. singular vs plural), and addition or removal of stopwords (e.g. "the", "and", "or").
+0.75 - Close synonym, e.g. "mobile phone" vs. "cellphone". This also includes abbreviations, e.g. "TCP" -> "transmission control protocol".
+0.5 - Synonyms which don't have the same meaning (same function, same properties). This includes broad-narrow (hyponym) and narrow-broad (hypernym) matches.
+0.25 - Somewhat related, e.g. the two phrases are in the same high-level domain but are not synonyms. This also includes antonyms.
 0.0 - Unrelated.
 
 ## Files
-train.csv - the training set, containing phrases, contexts, and their similarity scores
-test.csv - the test set set, identical in structure to the training set but without the score
+train.csv - the training set containing phrases, contexts, and their similarity scores
+test.csv - the test set, identical in structure to the training set but without the score
 sample_submission.csv - a sample submission file in the correct format
 
 ## Columns
@@ -70,4 +70,3 @@ score - the similarity. This is sourced from a combination of one or more manual
 
 ## Evalutaion 
 Submissions are evaluated on the Pearson correlation coefficient between the predicted and actual similarity scores.
-
